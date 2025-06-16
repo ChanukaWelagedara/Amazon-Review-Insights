@@ -1,9 +1,9 @@
-# Amazon-Review-Insights
-
-Analyze Amazon product reviews using Hadoop MapReduce (Java) and Python for sentiment, ratings, and trends
+---
 
 ```markdown
 # 📊 Amazon Product Review Analysis
+
+Analyze Amazon product reviews using Hadoop MapReduce (Java) and Python for sentiment, ratings, and trends.
 
 This project demonstrates **large-scale data analysis** using **Hadoop MapReduce (Java)** and **Python** for data preprocessing and visualization. The dataset contains Amazon product reviews, and this system extracts key insights such as:
 
@@ -14,32 +14,33 @@ This project demonstrates **large-scale data analysis** using **Hadoop MapReduce
 ---
 
 ## 📁 Project Structure
+
 ```
 
 Amazon-Review-Insights/
-├── AmazonReviewAnalysis/ # Java MapReduce code
-│ └── src/ # Java classes (Mappers, Reducers, Drivers)
-│ ├── AvgRatingMapper.java
-│ ├── AvgRatingReducer.java
-│ ├── AvgRatingDriver.java
-│ ├── ReviewsPerYearMapper.java
-│ ├── ReviewsPerYearReducer.java
-│ ├── ReviewsPerYearDriver.java
-│ ├── SentimentMapper.java
-│ ├── SentimentReducer.java
-│ ├── SentimentDriver.java
-│ ├── ReviewYearMapper.java
-│ ├── ReviewYearReducer.java
-│ ├── ReviewYearDriver.java
-├── preprocess/ # Python data cleaning
-│ ├── preprocess.ipynb
-│ └── cleaned_reviews.tsv
-├── visualization/ # Python data visualization
-│ └── visualization.ipynb
+├── AmazonReviewAnalysis/       # Java MapReduce code
+│   └── src/                    # Java classes (Mappers, Reducers, Drivers)
+│       ├── AvgRatingMapper.java
+│       ├── AvgRatingReducer.java
+│       ├── AvgRatingDriver.java
+│       ├── ReviewsPerYearMapper.java
+│       ├── ReviewsPerYearReducer.java
+│       ├── ReviewsPerYearDriver.java
+│       ├── SentimentMapper.java
+│       ├── SentimentReducer.java
+│       ├── SentimentDriver.java
+│       ├── ReviewYearMapper.java
+│       ├── ReviewYearReducer.java
+│       ├── ReviewYearDriver.java
+├── preprocess/                 # Python data cleaning
+│   ├── preprocess.ipynb
+│   └── cleaned\_reviews.tsv
+├── visualization/              # Python data visualization
+│   └── visualization.ipynb
 ├── data/
-│ └── Reviews.csv
+│   └── Reviews.csv
 ├── output/
-│ └── AmazonReviewAnalysis2.0.jar
+│   └── AmazonReviewAnalysis2.0.jar
 ├── README.md
 └── requirements.txt
 
@@ -58,7 +59,7 @@ cd preprocess
 pip install -r requirements.txt
 ````
 
-- Run `preprocess.ipynb` to clean the raw dataset and generate `cleaned_reviews.tsv`.
+* Run `preprocess.ipynb` to clean the raw dataset and generate `cleaned_reviews.tsv`.
 
 ---
 
@@ -116,7 +117,6 @@ JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
    <name>fs.defaultFS</name>
    <value>hdfs://localhost:9000</value>
  </property>
- <!-- Proxy user properties -->
 </configuration>
 ```
 
@@ -183,8 +183,8 @@ stop-yarn.sh
 jps
 ```
 
-- Namenode UI: [http://localhost:9870](http://localhost:9870)
-- ResourceManager UI: [http://localhost:8088](http://localhost:8088)
+* Namenode UI: [http://localhost:9870](http://localhost:9870)
+* ResourceManager UI: [http://localhost:8088](http://localhost:8088)
 
 ---
 
@@ -194,7 +194,7 @@ jps
 2. Compile all Mapper, Reducer, and Driver classes.
 3. Export the JAR as `AmazonReviewAnalysis2.0.jar` to the `output/` folder.
 
-#### Upload & Run on Hadoop:
+#### Upload & Run on Hadoop
 
 ```bash
 hdfs dfs -mkdir -p /review_analysis/input
@@ -206,7 +206,7 @@ hadoop jar AmazonReviewAnalysis2.0.jar main.ReviewYearDriver /review_analysis/in
 hadoop jar AmazonReviewAnalysis2.0.jar main.ReviewsPerYearDriver /review_analysis/input /review_analysis/output_reviews_per_year
 ```
 
-#### View Output:
+#### View Output
 
 ```bash
 hdfs dfs -cat /review_analysis/output_avg_rating/part-r-00000
@@ -215,7 +215,7 @@ hdfs dfs -cat /review_analysis/output_reviews_year/part-r-00000
 hdfs dfs -cat /review_analysis/output_reviews_per_year/part-r-00000
 ```
 
-#### Download from HDFS:
+#### Download from HDFS
 
 ```bash
 hdfs dfs -get /review_analysis/output_avg_rating ./output/avg_rating
@@ -233,29 +233,31 @@ cd visualization
 pip install -r ../requirements.txt
 ```
 
-- Run `visualization.ipynb` to generate insightful plots from the MapReduce outputs.
+* Run `visualization.ipynb` to generate insightful plots from the MapReduce outputs.
 
 ---
 
 ## 🛠️ Requirements
 
-- Java 8
-- Hadoop 3.4.1
-- Python 3.8+
-- Python Libraries:
+* Java 8
+* Hadoop 3.4.1
+* Python 3.8+
+* Python Libraries:
 
-  - `pandas`
-  - `matplotlib`
-  - `seaborn`
+  * `pandas`
+  * `matplotlib`
+  * `seaborn`
 
 ---
 
 ## 📦 Dataset
 
-- **Name**: Amazon Product Reviews
-- **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/arhamrumi/amazon-product-reviews)
+* **Name**: Amazon Product Reviews
+* **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/arhamrumi/amazon-product-reviews)
 
 ```
 
-Let me know if you want to add images, GIF demos, or GitHub badges to make it even more impressive!
+---
+
+✅ You can now paste this full script into your `README.md` without breaking the markdown. Let me know if you also want a `.md` file directly or want to embed graphs, images, or badges!
 ```
