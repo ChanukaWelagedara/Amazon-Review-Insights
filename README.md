@@ -1,4 +1,3 @@
-
 ---
 
 ```markdown
@@ -45,7 +44,7 @@ Amazon-Review-Insights/
 ├── README.md
 └── requirements.txt
 
-````
+```
 
 ---
 
@@ -58,9 +57,9 @@ Amazon-Review-Insights/
 ```bash
 cd preprocess
 pip install -r requirements.txt
-````
+```
 
-* Run `preprocess.ipynb` to clean the raw dataset and generate `cleaned_reviews.tsv`.
+- Run `preprocess.ipynb` to clean the raw dataset and generate `cleaned_reviews.tsv`.
 
 ---
 
@@ -184,8 +183,8 @@ stop-yarn.sh
 jps
 ```
 
-* Namenode UI: [http://localhost:9870](http://localhost:9870)
-* ResourceManager UI: [http://localhost:8088](http://localhost:8088)
+- Namenode UI: [http://localhost:9870](http://localhost:9870)
+- ResourceManager UI: [http://localhost:8088](http://localhost:8088)
 
 ---
 
@@ -234,27 +233,27 @@ cd visualization
 pip install -r ../requirements.txt
 ```
 
-* Run `visualization.ipynb` to generate insightful plots from the MapReduce outputs.
+- Run `visualization.ipynb` to generate insightful plots from the MapReduce outputs.
 
 ---
 
 ## 🛠️ Requirements
 
-* Java 8
-* Hadoop 3.4.1
-* Python 3.8+
-* Python Libraries:
+- Java 8
+- Hadoop 3.4.1
+- Python 3.8+
+- Python Libraries:
 
-  * `pandas`
-  * `matplotlib`
-  * `seaborn`
+  - `pandas`
+  - `matplotlib`
+  - `seaborn`
 
 ---
 
 ## 📦 Dataset
 
-* **Name**: Amazon Product Reviews
-* **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/arhamrumi/amazon-product-reviews)
+- **Name**: Amazon Product Reviews
+- **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/arhamrumi/amazon-product-reviews)
 
 ```
 
