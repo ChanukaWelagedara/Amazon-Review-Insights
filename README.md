@@ -1,6 +1,3 @@
----
-
-```markdown
 # 📊 Amazon Product Review Analysis
 
 Analyze Amazon product reviews using Hadoop MapReduce (Java) and Python for sentiment, ratings, and trends.
@@ -16,10 +13,9 @@ This project demonstrates **large-scale data analysis** using **Hadoop MapReduce
 ## 📁 Project Structure
 
 ```
-
 Amazon-Review-Insights/
-├── AmazonReviewAnalysis/       # Java MapReduce code
-│   └── src/                    # Java classes (Mappers, Reducers, Drivers)
+├── AmazonReviewAnalysis/         # Java MapReduce code
+│   └── src/
 │       ├── AvgRatingMapper.java
 │       ├── AvgRatingReducer.java
 │       ├── AvgRatingDriver.java
@@ -32,10 +28,10 @@ Amazon-Review-Insights/
 │       ├── ReviewYearMapper.java
 │       ├── ReviewYearReducer.java
 │       ├── ReviewYearDriver.java
-├── preprocess/                 # Python data cleaning
+├── preprocess/                   # Python data cleaning
 │   ├── preprocess.ipynb
-│   └── cleaned\_reviews.tsv
-├── visualization/              # Python data visualization
+│   └── cleaned_reviews.tsv
+├── visualization/                # Python data visualization
 │   └── visualization.ipynb
 ├── data/
 │   └── Reviews.csv
@@ -43,7 +39,6 @@ Amazon-Review-Insights/
 │   └── AmazonReviewAnalysis2.0.jar
 ├── README.md
 └── requirements.txt
-
 ```
 
 ---
@@ -56,7 +51,7 @@ Amazon-Review-Insights/
 
 ```bash
 cd preprocess
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 ```
 
 - Run `preprocess.ipynb` to clean the raw dataset and generate `cleaned_reviews.tsv`.
@@ -103,57 +98,54 @@ tar -zxvf hadoop-3.4.1.tar.gz
 
 #### 2.5 Configure Hadoop
 
-**hadoop-env.sh**
+Edit these configuration files under `$HADOOP_HOME/etc/hadoop/`:
 
+**hadoop-env.sh**
 ```bash
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
 
 **core-site.xml**
-
 ```xml
 <configuration>
- <property>
-   <name>fs.defaultFS</name>
-   <value>hdfs://localhost:9000</value>
- </property>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
 </configuration>
 ```
 
 **hdfs-site.xml**
-
 ```xml
 <configuration>
- <property>
-   <name>dfs.replication</name>
-   <value>1</value>
- </property>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
 </configuration>
 ```
 
 **mapred-site.xml**
-
 ```xml
 <configuration>
- <property>
-   <name>mapreduce.framework.name</name>
-   <value>yarn</value>
- </property>
- <property>
-   <name>mapreduce.application.classpath</name>
-   <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
- </property>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>mapreduce.application.classpath</name>
+    <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+  </property>
 </configuration>
 ```
 
 **yarn-site.xml**
-
 ```xml
 <configuration>
- <property>
-   <name>yarn.nodemanager.aux-services</name>
-   <value>mapreduce_shuffle</value>
- </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
 </configuration>
 ```
 
@@ -170,7 +162,7 @@ start-dfs.sh
 start-yarn.sh
 ```
 
-> To stop:
+> To stop services:
 
 ```bash
 stop-dfs.sh
@@ -183,30 +175,30 @@ stop-yarn.sh
 jps
 ```
 
-- Namenode UI: [http://localhost:9870](http://localhost:9870)
-- ResourceManager UI: [http://localhost:8088](http://localhost:8088)
+- Namenode UI: http://localhost:9870  
+- ResourceManager UI: http://localhost:8088
 
 ---
 
-### 🧩 3. MapReduce Job (Java in Eclipse)
+### 🧩 3. Run MapReduce Job (Java)
 
-1. Import the `AmazonReviewAnalysis/` directory as a Java project.
-2. Compile all Mapper, Reducer, and Driver classes.
-3. Export the JAR as `AmazonReviewAnalysis2.0.jar` to the `output/` folder.
+1. Open `AmazonReviewAnalysis/` in Eclipse or any Java IDE.
+2. Compile all Java files inside the `src/` directory.
+3. Export as `AmazonReviewAnalysis2.0.jar` and move to `output/`.
 
-#### Upload & Run on Hadoop
+#### Upload and Run:
 
 ```bash
 hdfs dfs -mkdir -p /review_analysis/input
 hdfs dfs -put cleaned_reviews.tsv /review_analysis/input
 
-hadoop jar AmazonReviewAnalysis2.0.jar main.AvgRatingDriver /review_analysis/input /review_analysis/output_avg_rating
-hadoop jar AmazonReviewAnalysis2.0.jar main.SentimentDriver /review_analysis/input /review_analysis/output_review_sentiment
-hadoop jar AmazonReviewAnalysis2.0.jar main.ReviewYearDriver /review_analysis/input /review_analysis/output_reviews_year
-hadoop jar AmazonReviewAnalysis2.0.jar main.ReviewsPerYearDriver /review_analysis/input /review_analysis/output_reviews_per_year
+hadoop jar output/AmazonReviewAnalysis2.0.jar main.AvgRatingDriver /review_analysis/input /review_analysis/output_avg_rating
+hadoop jar output/AmazonReviewAnalysis2.0.jar main.SentimentDriver /review_analysis/input /review_analysis/output_review_sentiment
+hadoop jar output/AmazonReviewAnalysis2.0.jar main.ReviewYearDriver /review_analysis/input /review_analysis/output_reviews_year
+hadoop jar output/AmazonReviewAnalysis2.0.jar main.ReviewsPerYearDriver /review_analysis/input /review_analysis/output_reviews_per_year
 ```
 
-#### View Output
+#### View Output:
 
 ```bash
 hdfs dfs -cat /review_analysis/output_avg_rating/part-r-00000
@@ -215,7 +207,7 @@ hdfs dfs -cat /review_analysis/output_reviews_year/part-r-00000
 hdfs dfs -cat /review_analysis/output_reviews_per_year/part-r-00000
 ```
 
-#### Download from HDFS
+#### Download from HDFS:
 
 ```bash
 hdfs dfs -get /review_analysis/output_avg_rating ./output/avg_rating
@@ -233,7 +225,7 @@ cd visualization
 pip install -r ../requirements.txt
 ```
 
-- Run `visualization.ipynb` to generate insightful plots from the MapReduce outputs.
+- Run `visualization.ipynb` to generate insights and visual plots.
 
 ---
 
@@ -243,7 +235,6 @@ pip install -r ../requirements.txt
 - Hadoop 3.4.1
 - Python 3.8+
 - Python Libraries:
-
   - `pandas`
   - `matplotlib`
   - `seaborn`
@@ -255,9 +246,4 @@ pip install -r ../requirements.txt
 - **Name**: Amazon Product Reviews
 - **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/arhamrumi/amazon-product-reviews)
 
-```
-
 ---
-
-✅ You can now paste this full script into your `README.md` without breaking the markdown. Let me know if you also want a `.md` file directly or want to embed graphs, images, or badges!
-```
